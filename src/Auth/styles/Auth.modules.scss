@@ -1,0 +1,55 @@
+
+
+.logincard {
+  @apply card w-96 bg-neutral text-neutral-content;
+  >div {
+    @apply card-body items-center text-center;
+    >h2 {
+      @apply card-title;
+    }
+    >p {
+      @apply text-blue-100;
+    }
+    >div {
+      @apply flex justify-center;
+      >svg {
+        @apply w-20 h-20 text-blue-300;
+      }
+    }
+
+    >form {
+
+      >div:nth-child(1) {
+        @apply form-control;
+        >label {
+          @apply label justify-center;
+          >span {
+            @apply label-text text-blue-300;
+          }
+        }
+        >input {
+          @apply input input-bordered text-primary;
+        }
+      }
+
+      >div:nth-child(2) {
+        @apply mt-4;
+
+        >div {
+          @apply flex items-baseline justify-between;
+          button[type='submit']  {
+              @apply btn btn-primary;
+          }
+          button {
+            @apply text-sm text-blue-300 hover:underline;
+          }
+        }
+
+      }
+
+    }
+  }
+
+
+}
+
