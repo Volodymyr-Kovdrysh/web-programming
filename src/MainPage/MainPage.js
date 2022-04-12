@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Route, Routes, Navigate} from 'react-router-dom'
 import Spinner from "../FeedbackApp/components/shared/Spinner";
 import styles from "./MainPage.module.scss"
 import {SiFacebook, SiTwitter, SiYoutube} from "react-icons/si";
 import Login from "../Auth/Login";
 import Logout from "../Auth/Logout";
+import AuthContext from "../Auth/context/AuthContext";
 
-const MainPage = ({login, islogin}) => {
+const MainPage = () => {
+
+    const {login} = useContext(AuthContext)
+
     return (
         <div className={styles.parent}>
 
@@ -15,7 +19,7 @@ const MainPage = ({login, islogin}) => {
                     path='/home'
                     element={
                         <>
-                            {islogin ? <div className={styles.mywindow}>
+                            {login ? <div className={styles.mywindow}>
                                 <div className={styles.content}><Spinner/></div>
                             </div> : <Navigate replace to="/login" />}
 
@@ -25,15 +29,15 @@ const MainPage = ({login, islogin}) => {
                     } />
                 <Route path='/login' element={
                     <>
-                        {islogin ? <Navigate replace to="/home" /> : <div className={styles.loginwindow}>
-                            <Login login={login} />
+                        {login ? <Navigate replace to="/home" /> : <div className={styles.loginwindow}>
+                            <Login />
                         </div>}
 
                     </>
                 } />
                 <Route path='/logout' element={
                     <>
-                        {islogin ? <div className={styles.loginwindow}><Logout login={login} /></div> : <Navigate replace to="/login" />}
+                        {login ? <div className={styles.loginwindow}><Logout /></div> : <Navigate replace to="/login" />}
 
                     </>
                 } />

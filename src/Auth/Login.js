@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './styles/Auth.modules.scss'
+import AuthContext from "./context/AuthContext";
 
-const Login = ({login}) => {
+const Login = () => {
+    const {setLogin} = useContext(AuthContext)
 
     const [email, setEmail] = useState('')
 
@@ -9,7 +11,7 @@ const Login = ({login}) => {
         e.preventDefault()
         console.log(e)
 
-        login(true)
+        setLogin(true)
 
     }
 
