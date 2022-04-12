@@ -25,7 +25,7 @@ const MainPage = ({login, islogin}) => {
                     } />
                 <Route path='/login' element={
                     <>
-                        {islogin ? <Navigate replace to="/home" /> :<div className="flex justify-center">
+                        {islogin ? <Navigate replace to="/home" /> : <div className={styles.loginwindow}>
                             <Login login={login} />
                         </div>}
 
@@ -33,7 +33,7 @@ const MainPage = ({login, islogin}) => {
                 } />
                 <Route path='/logout' element={
                     <>
-                        {islogin ? <div className="flex justify-center"><Logout login={login} /></div> : <Navigate replace to="/login" />}
+                        {islogin ? <div className={styles.loginwindow}><Logout login={login} /></div> : <Navigate replace to="/login" />}
 
                     </>
                 } />

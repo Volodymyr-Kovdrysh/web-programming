@@ -1,6 +1,10 @@
 .parent {
   @apply flex flex-col h-screen;
 
+  .loginwindow {
+    @apply m-auto;
+  }
+
   .mywindow {
     @apply mockup-window border border-base-300 h-full;
 
