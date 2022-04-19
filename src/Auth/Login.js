@@ -10,7 +10,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e)
+        // console.log(e)
 
         setLogin(true)
 
