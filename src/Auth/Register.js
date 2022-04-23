@@ -3,18 +3,34 @@ import AuthContext from "./context/AuthContext";
 import './styles/Login.modules.scss'
 import {Link} from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
 
     const {setLogin} = useContext(AuthContext)
 
     const [showpass, setShowpass] = useState(false)
 
-    const [email, setEmail] = useState('')
+    const [formData, setFormData] = useState({
+        nickname: '',
+        email: '',
+        password: '',
+    })
+
+   const {email, nickname, password} = formData
 
     const handleSubmit = (e) => {
         e.preventDefault()
-         console.log(e)
+        console.log(e.target.nickname.value)
         setLogin(true)
+
+    }
+
+    const handleChange = (e) => {
+        setFormData(prevState => {
+        return {
+            ...prevState,
+            [e.target.name]: e.target.value
+        }}
+        )
 
     }
 
@@ -42,6 +58,17 @@ const Login = () => {
                 <form onSubmit={handleSubmit} >
                     <div>
                         <label>
+                            <span>NickName</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="NickName"
+                            autoComplete="on"
+                            name="nickname"
+                            value={nickname}
+                            onChange={handleChange}
+                        />
+                        <label>
                             <span>Email</span>
                         </label>
                         <input
@@ -50,36 +77,36 @@ const Login = () => {
                             autoComplete="on"
                             name="email"
                             value={email}
-                            onChange={(e)=>{
-                                setEmail(e.target.value)}}
+                            onChange={handleChange}
                         />
                         <label>
                             <span>Password</span>
                         </label>
                         <div>
-                        <input
-                            type={`${showpass ? "text": "password"}`}
-                            placeholder="password"
-                            name="pass"
-                            autoComplete="on"
-                        />
-                        <input
-                            type="checkbox"
-                            checked={showpass}
-                            className="password"
-                            onChange={()=>setShowpass(prevState => !prevState)}
-                        />
+                            <input
+                                type={`${showpass ? "text": "password"}`}
+                                placeholder="password"
+                                name="password"
+                                autoComplete="on"
+                                value={password}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="checkbox"
+                                checked={showpass}
+                                className="password"
+                                onChange={()=>setShowpass(prevState => !prevState)}
+                            />
                         </div>
                     </div>
                     <div>
                         <div>
-                            <button type="submit">Login</button>
-                            <button onClick={(e)=>{e.preventDefault()}}>Forgot password?</button>
+                            <button type="submit">Register</button>
                         </div>
                     </div>
                 </form>
 
-                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
 
             </div>
         </div>
@@ -87,4 +114,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
