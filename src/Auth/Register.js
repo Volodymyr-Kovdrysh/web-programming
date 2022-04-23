@@ -13,12 +13,9 @@ const Register = () => {
 
     const { registerUser} = useContext(AuthContext)
 
-    // const [showpass, setShowpass] = useState(false)
-
     const [formData, setFormData] = useState({
 
         email: '',
-        // password: '',
     })
 
    const {email} = formData
@@ -87,26 +84,7 @@ const Register = () => {
                             onChange={handleChange}
                             required={true}
                         />
-                        {/*<label>*/}
-                        {/*    <span>Password</span>*/}
-                        {/*</label>*/}
-                        {/*<div>*/}
-                        {/*    <input*/}
-                        {/*        type={`${showpass ? "text": "password"}`}*/}
-                        {/*        placeholder="password"*/}
-                        {/*        name="password"*/}
-                        {/*        autoComplete="on"*/}
-                        {/*        value={password}*/}
-                        {/*        onChange={handleChange}*/}
-                        {/*        required={true}*/}
-                        {/*    />*/}
-                        {/*    <input*/}
-                        {/*        type="checkbox"*/}
-                        {/*        checked={showpass}*/}
-                        {/*        className="password"*/}
-                        {/*        onChange={()=>setShowpass(prevState => !prevState)}*/}
-                        {/*    />*/}
-                        {/*</div>*/}
+
                     </div>
                     <div>
                         <div>

@@ -6,17 +6,45 @@ import {Link} from "react-router-dom";
 
 const Login = () => {
 
-    const {setLogin} = useContext(AuthContext)
+    const {loginUser} = useContext(AuthContext)
 
     const [showpass, setShowpass] = useState(false)
 
-    const [email, setEmail] = useState('')
+    const [formData, setFormData] = useState({
+
+        email: '',
+        password: '',
+    })
+
+    const {email, password} = formData
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // if (!validEmail.test(email)) {
+        //     toast.error('Ваша поштова скринька не належить до спільноти Коледжу', {
+        //         position: "top-right",
+        //         autoClose: 3000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //     });
+        //
+        //     return
+        // }
 
+        loginUser(formData)
 
-        setLogin(true)
+    }
+
+    const handleChange = (e) => {
+        setFormData(prevState => {
+            return {
+                ...prevState,
+                [e.target.name]: e.target.value
+            }}
+        )
 
     }
 
@@ -24,8 +52,7 @@ const Login = () => {
 
         <div className="logincard">
             <div>
-                <h2>Cookies!</h2>
-                <p>We are using cookies for no reason.</p>
+                <h2>Вітаю</h2>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
@@ -52,8 +79,8 @@ const Login = () => {
                             autoComplete="on"
                             name="email"
                             value={email}
-                            onChange={(e)=>{
-                                setEmail(e.target.value)}}
+                            onChange={handleChange}
+                            required={true}
                         />
                         <label>
                             <span>Password</span>
@@ -62,8 +89,11 @@ const Login = () => {
                         <input
                             type={`${showpass ? "text": "password"}`}
                             placeholder="password"
-                            name="pass"
+                            name="password"
                             autoComplete="on"
+                            value={password}
+                            onChange={handleChange}
+                            required={true}
                         />
                         <input
                             type="checkbox"
@@ -75,13 +105,13 @@ const Login = () => {
                     </div>
                     <div>
                         <div>
-                            <button type="submit">Login</button>
-                            <button onClick={(e)=>{e.preventDefault()}}>Forgot password?</button>
+                            <button type="submit">Увійти</button>
+                            <button onClick={(e)=>{e.preventDefault()}}>Забули пароль?</button>
                         </div>
                     </div>
                 </form>
 
-                <Link to="/register">Register</Link>
+                <Link to="/register">До реєстрації</Link>
 
             </div>
         </div>

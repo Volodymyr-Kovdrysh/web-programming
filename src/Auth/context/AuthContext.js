@@ -13,24 +13,40 @@ export const AuthProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(authReducer, initialState)
 
-    const registerUser = async (email) => {
-        // toast.loading("Please wait...")
+    const loginUser = async (formData) => {
         setLoading('Будь ласка, зачекайте...')
         const params = new URLSearchParams({
-            action: 'REGISTER'
+            action: 'LOGIN'
         })
         const response = await fetch(`${process.env.REACT_APP_AUTH}?${params}`,
             {
                 method: 'post',
-                body: JSON.stringify({
-                    email
-                })
+                body: JSON.stringify(formData)
+            })
+        const data = await response.json()
+        console.log('data',data)
+        dispatch({
+            type: 'LOGIN',
+            payload: data
         })
-        const {status} = await response.json()
+    }
 
+    const registerUser = async (email) => {
+        // toast.loading("Please wait...")
+        setLoading('Будь ласка, зачекайте...')
+        const params = new URLSearchParams({
+            action: 'REGISTER',
+
+        })
+        const response = await fetch(`${process.env.REACT_APP_AUTH}?${params}`,
+            {
+                method: "post",
+                body: JSON.stringify( { email })
+        })
+        const data = await response.json()
         dispatch({
             type: 'REGISTER',
-            payload: status
+            payload: data
         })
 
     }
@@ -43,7 +59,8 @@ export const AuthProvider = ({children}) => {
         login: state.login,
         setLogin,
         setLogout,
-        registerUser
+        registerUser,
+        loginUser
     }}>
         {children}
     </AuthContext.Provider>

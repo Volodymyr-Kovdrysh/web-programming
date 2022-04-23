@@ -7,7 +7,15 @@ const authReducer = (state, action) => {
                 ...state,
                 login: false,
                 loading: false,
-                toast: toast.update(state.toast,{ render: action.payload, type: "success", isLoading: false, autoClose: 2000 })
+                toast: toast.update(state.toast,{ render: action.payload.status, type: "success", isLoading: false, autoClose: 2000 })
+            }
+        case 'LOGIN':
+            return {
+                ...state,
+                login: action.payload.login,
+                loading: false,
+                toast: toast.update(state.toast,{ render: action.payload.status,
+                    type: `${action.payload.login ? 'succes':"warning"}`, isLoading: false, autoClose: 2000 })
             }
         case 'SET_LOGIN':
             return {
