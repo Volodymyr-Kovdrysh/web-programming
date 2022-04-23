@@ -24,7 +24,7 @@ export const AuthProvider = ({children}) => {
                 body: JSON.stringify(formData)
             })
         const data = await response.json()
-        console.log('data',data)
+
         dispatch({
             type: 'LOGIN',
             payload: data
