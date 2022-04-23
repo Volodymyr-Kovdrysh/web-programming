@@ -2,25 +2,44 @@ import React, {useContext, useState} from 'react';
 import AuthContext from "./context/AuthContext";
 import './styles/Login.modules.scss'
 import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
+
+const validEmail = new RegExp(
+    /^[a-zA-Z\d._:$!%-]+@chnu\.edu\.ua$/
+);
+
 
 const Register = () => {
 
-    const {setLogin} = useContext(AuthContext)
+    const { registerUser} = useContext(AuthContext)
 
-    const [showpass, setShowpass] = useState(false)
+    // const [showpass, setShowpass] = useState(false)
 
     const [formData, setFormData] = useState({
-        nickname: '',
+
         email: '',
-        password: '',
+        // password: '',
     })
 
-   const {email, nickname, password} = formData
+   const {email} = formData
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.nickname.value)
-        setLogin(true)
+        if (!validEmail.test(email)) {
+            toast.error('Ваша поштова скринька не належить до спільноти Коледжу', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+            return
+        }
+
+        registerUser(email)
 
     }
 
@@ -38,8 +57,7 @@ const Register = () => {
 
         <div className="logincard">
             <div>
-                <h2>Cookies!</h2>
-                <p>We are using cookies for no reason.</p>
+                <h2>Форма реєстрації</h2>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
@@ -58,17 +76,6 @@ const Register = () => {
                 <form onSubmit={handleSubmit} >
                     <div>
                         <label>
-                            <span>NickName</span>
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="NickName"
-                            autoComplete="on"
-                            name="nickname"
-                            value={nickname}
-                            onChange={handleChange}
-                        />
-                        <label>
                             <span>Email</span>
                         </label>
                         <input
@@ -78,35 +85,37 @@ const Register = () => {
                             name="email"
                             value={email}
                             onChange={handleChange}
+                            required={true}
                         />
-                        <label>
-                            <span>Password</span>
-                        </label>
-                        <div>
-                            <input
-                                type={`${showpass ? "text": "password"}`}
-                                placeholder="password"
-                                name="password"
-                                autoComplete="on"
-                                value={password}
-                                onChange={handleChange}
-                            />
-                            <input
-                                type="checkbox"
-                                checked={showpass}
-                                className="password"
-                                onChange={()=>setShowpass(prevState => !prevState)}
-                            />
-                        </div>
+                        {/*<label>*/}
+                        {/*    <span>Password</span>*/}
+                        {/*</label>*/}
+                        {/*<div>*/}
+                        {/*    <input*/}
+                        {/*        type={`${showpass ? "text": "password"}`}*/}
+                        {/*        placeholder="password"*/}
+                        {/*        name="password"*/}
+                        {/*        autoComplete="on"*/}
+                        {/*        value={password}*/}
+                        {/*        onChange={handleChange}*/}
+                        {/*        required={true}*/}
+                        {/*    />*/}
+                        {/*    <input*/}
+                        {/*        type="checkbox"*/}
+                        {/*        checked={showpass}*/}
+                        {/*        className="password"*/}
+                        {/*        onChange={()=>setShowpass(prevState => !prevState)}*/}
+                        {/*    />*/}
+                        {/*</div>*/}
                     </div>
                     <div>
                         <div>
-                            <button type="submit">Register</button>
+                            <button type="submit">Зареєструватися</button>
                         </div>
                     </div>
                 </form>
 
-                <Link to="/login">Login</Link>
+                <Link to="/login">Перейти до фоми входу</Link>
 
             </div>
         </div>

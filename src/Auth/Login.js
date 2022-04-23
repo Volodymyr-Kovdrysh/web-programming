@@ -3,6 +3,7 @@ import AuthContext from "./context/AuthContext";
 import './styles/Login.modules.scss'
 import {Link} from "react-router-dom";
 
+
 const Login = () => {
 
     const {setLogin} = useContext(AuthContext)
@@ -13,7 +14,8 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-         console.log(e)
+
+
         setLogin(true)
 
     }
