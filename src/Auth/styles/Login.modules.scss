@@ -29,18 +29,27 @@
         >input {
           @apply input input-bordered text-primary;
         }
+        >div {
+          @apply relative;
+          input {
+            @apply input input-bordered text-primary;
+          }
+          input.password {
+            @apply absolute right-0 toggle toggle-md toggle-primary my-3 mr-2;
+          }
+        }
       }
 
       >div:nth-child(2) {
         @apply mt-4;
 
         >div {
-          @apply flex items-baseline justify-between;
+          @apply flex flex-col items-end justify-between;
           button[type='submit']  {
-            @apply btn btn-primary;
+            @apply btn btn-primary hover:no-underline w-full;
           }
           button {
-            @apply text-sm text-blue-300 hover:underline;
+            @apply text-sm text-blue-300 hover:underline my-2;
           }
         }
 

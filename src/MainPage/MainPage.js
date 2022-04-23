@@ -6,6 +6,7 @@ import {SiFacebook, SiTwitter, SiYoutube} from "react-icons/si";
 import Login from "../Auth/Login";
 import Logout from "../Auth/Logout";
 import AuthContext from "../Auth/context/AuthContext";
+import Register from "../Auth/Register";
 
 const MainPage = () => {
 
@@ -34,6 +35,16 @@ const MainPage = () => {
                             <div className={styles.loginwindow}>
                             <Login />
                         </div>}
+
+                    </>
+                } />
+                <Route path='/register' element={
+                    <>
+                        {login ? <Navigate replace to="/home" />
+                            :
+                            <div className={styles.loginwindow}>
+                                <Register />
+                            </div>}
 
                     </>
                 } />

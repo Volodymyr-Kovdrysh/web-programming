@@ -2,48 +2,50 @@ import React, {useContext, useState} from 'react';
 import AuthContext from "./context/AuthContext";
 import './styles/Login.modules.scss'
 import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
+
+const validEmail = new RegExp(
+    /^[a-zA-Z\d._:$!%-]+@chnu\.edu\.ua$/
+);
 
 
-const Login = () => {
+const Register = () => {
 
-    const {loginUser} = useContext(AuthContext)
-
-    const [showpass, setShowpass] = useState(false)
+    const { registerUser} = useContext(AuthContext)
 
     const [formData, setFormData] = useState({
 
         email: '',
-        password: '',
     })
 
-    const {email, password} = formData
+   const {email} = formData
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // if (!validEmail.test(email)) {
-        //     toast.error('Ваша поштова скринька не належить до спільноти Коледжу', {
-        //         position: "top-right",
-        //         autoClose: 3000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //     });
-        //
-        //     return
-        // }
+        if (!validEmail.test(email)) {
+            toast.error('Ваша поштова скринька не належить до спільноти Коледжу', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 
-        loginUser(formData)
+            return
+        }
+
+        registerUser(email)
 
     }
 
     const handleChange = (e) => {
         setFormData(prevState => {
-            return {
-                ...prevState,
-                [e.target.name]: e.target.value
-            }}
+        return {
+            ...prevState,
+            [e.target.name]: e.target.value
+        }}
         )
 
     }
@@ -52,7 +54,7 @@ const Login = () => {
 
         <div className="logincard">
             <div>
-                <h2>Вітаю</h2>
+                <h2>Форма реєстрації</h2>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
@@ -82,36 +84,16 @@ const Login = () => {
                             onChange={handleChange}
                             required={true}
                         />
-                        <label>
-                            <span>Password</span>
-                        </label>
-                        <div>
-                        <input
-                            type={`${showpass ? "text": "password"}`}
-                            placeholder="password"
-                            name="password"
-                            autoComplete="on"
-                            value={password}
-                            onChange={handleChange}
-                            required={true}
-                        />
-                        <input
-                            type="checkbox"
-                            checked={showpass}
-                            className="password"
-                            onChange={()=>setShowpass(prevState => !prevState)}
-                        />
-                        </div>
+
                     </div>
                     <div>
                         <div>
-                            <button type="submit">Увійти</button>
-                            <button onClick={(e)=>{e.preventDefault()}}>Забули пароль?</button>
+                            <button type="submit">Зареєструватися</button>
                         </div>
                     </div>
                 </form>
 
-                <Link to="/register">До реєстрації</Link>
+                <Link to="/login">Перейти до фоми входу</Link>
 
             </div>
         </div>
@@ -119,4 +101,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
