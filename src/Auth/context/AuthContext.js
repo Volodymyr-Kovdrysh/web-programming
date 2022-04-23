@@ -32,7 +32,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const registerUser = async (email) => {
-        // toast.loading("Please wait...")
+
         setLoading('Будь ласка, зачекайте...')
         const params = new URLSearchParams({
             action: 'REGISTER',
